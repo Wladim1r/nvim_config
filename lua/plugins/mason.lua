@@ -22,7 +22,6 @@ return {
         mason_lspconfig.setup({
             ensure_installed = {
                 "gopls",    -- Go
-                "buffs",    -- protobuf/gRPC (если нужно)
                 "lua_ls",   -- Lua (если нужен)
             },
             automatic_installation = true,
@@ -31,7 +30,6 @@ return {
         mason_tool_installer.setup({
         ensure_installed = {
             "golines",  -- форматтер для Go
-            "templ",    -- CLI для Templ (если используется)
             "stylua",   -- форматтер для Lua (если нужен)
             },
         })
