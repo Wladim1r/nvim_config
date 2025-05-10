@@ -1,0 +1,19 @@
+vim.g.mapleader = " "
+
+vim.o.relativenumber = true
+vim.o.number = true
+
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.showmode = true
+vim.opt.smartindent = true
+vim.opt.autoindent = true
+
+vim.keymap.set("n", "<leader>pp", ":!prettier -w %<CR><CR>") -- prettier formatter
+vim.keymap.set('n', '<leader>gr', ':w | !go run %<CR>', { desc = 'Go Run current file' })
+vim.keymap.set('i', 'jj', '<Esc>', { noremap = true, silent = true })
+vim.keymap.set("n", "<C-c>", "<cmd>Telescope close<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>t", ":terminal<CR>i", { desc = "Open terminal and focus" })
+
+vim.opt.clipboard = 'unnamedplus'  -- Использовать системный буфер по умолчанию
