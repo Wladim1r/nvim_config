@@ -1,14 +1,14 @@
 return {
-  'stevearc/conform.nvim',
-  lazy = true,
-	event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
+	"stevearc/conform.nvim",
+	lazy = true,
+	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		local conform = require("conform")
 
 		conform.setup({
 			formatters_by_ft = {
-    			json = { "prettier" },
-				golang = { "golines" },
+				go = { "gofmt", "goimports", "golines" },
+				json = { "prettier" },
 				sql = { "sql-formatter" },
 				yaml = { "prettier" },
 				markdown = { "prettier" },
@@ -20,14 +20,13 @@ return {
 					require_cwd_config = true,
 				},
 			},
+			-- Форматировать при сохранении
+			format_on_save = {
+				timeout_ms = 100,
+				lsp_fallback = true,
+			},
 		})
 
-		vim.keymap.set({ "n", "v" }, "<leader>ff", function()
-			conform.format({
-				lsp_fallback = false,
-				async = false,
-				timeout_ms = 1000,
-			})
-		end, { desc = "Format file or range (in visual mode)" })
+		vim.keymap.set({ "n", "v" }, "<C-s>", "<cmd>w<cr>", { desc = "Save file" })
 	end,
 }
