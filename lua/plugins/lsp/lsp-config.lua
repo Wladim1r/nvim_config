@@ -17,6 +17,23 @@ return {
         vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { underline = false })
         vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { underline = false })
 
+        vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "" })   -- Пусто (отключаем)
+        vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "" })    -- Пусто (отключаем)
+        vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "" })   -- Пусто (отключаем)
+
+        -- Настройка виртуального текста (отображается справа от строки)
+        vim.diagnostic.config({
+          virtual_text = {
+            severity = { min = vim.diagnostic.severity.ERROR },  -- Только ошибки
+            format = function(diagnostic)
+              return diagnostic.message
+            end,
+          },
+          signs = true,  -- Но значки будут скрыты для WARN/HINT/INFO из-за sign_define выше
+          underline = false,  -- Отключаем подчёркивание
+          update_in_insert = false,  -- Не обновлять в режиме вставки
+        })
+
         -- Единые настройки диагностики
         vim.diagnostic.config({
             virtual_text = {
