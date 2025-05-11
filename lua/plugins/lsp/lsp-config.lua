@@ -67,68 +67,27 @@ return {
 		})
 
 		-- used to enable autocompletion (assign to every lsp server config)
-		local capabilities = cmp_nvim_lsp.default_capabilities()
+        local capabilities = cmp_nvim_lsp.default_capabilities()
 
         vim.diagnostic.config({
-          -- Настройка значков для разных уровней диагностики
-          signs = {
-            text = {
-              [vim.diagnostic.severity.ERROR] = " ",
-              -- Остальные уровни не указываем, чтобы они не отображались
-            },
-          },
-          
-          -- Виртуальный текст (встроенные сообщения в коде)
           virtual_text = {
-            prefix = "●",
+            prefix = "◈",
             spacing = 4,
             format = function(diagnostic)
               return string.format(
-                "%s (%s)",
-                diagnostic.message,
-                diagnostic.source or "unknown"
-              )
-            end,
+                "%s", 
+                diagnostic.message
+              )            end,
             -- Показываем только ошибки
             severity = {
               min = vim.diagnostic.severity.ERROR,
-              max = vim.diagnostic.severity.ERROR,
-            },
-          },
-          
-          -- Подчеркивание проблемных мест
-          underline = {
-            severity = {
-              min = vim.diagnostic.severity.ERROR,
-              max = vim.diagnostic.severity.ERROR,
             },
           },
           
           -- Обновление диагностики в режиме вставки
           update_in_insert = true,
-          
-          -- Сортировка по серьезности
-          severity_sort = true,
-          
-          -- Дополнительные настройки для лучшего UX
-          float = {
-            border = "rounded",
-            source = "always",
-            header = "",
-            prefix = function(diagnostic)
-              -- Показываем иконку только для ошибок
-              if diagnostic.severity == vim.diagnostic.severity.ERROR then
-                return " "
-              end
-              return ""
-            end,
-            -- Фильтруем только ошибки для плавающего окна
-            severity = {
-              min = vim.diagnostic.severity.ERROR,
-              max = vim.diagnostic.severity.ERROR,
-            },
-          },
         })
+
         lspconfig.templ.setup({
             capabilities = capabilities,
         })
