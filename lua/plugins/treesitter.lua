@@ -1,23 +1,39 @@
 return {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = function () 
-      local configs = require("nvim-treesitter.configs")
+	"nvim-treesitter/nvim-treesitter",
+	build = ":TSUpdate",
+	config = function()
+		local configs = require("nvim-treesitter.configs")
 
-      configs.setup({
-          ensure_installed = {
-              "lua",
-              "go",
-              "sql",
-              "make",
-              "dockerfile",
-              "yaml",
-              "proto",
-          },
-          sync_install = false,
-          auto_isntall = true,
-          highlight = { enable = true },
-          indent = { enable = true },  
-        })
-    end
- }
+		configs.setup({
+			ensure_installed = {
+				"lua",
+				"go",
+				"sql",
+				"make",
+				"dockerfile",
+				"yaml",
+				"proto",
+			},
+			sync_install = false,
+			auto_isntall = true,
+			highlight = { enable = true },
+			indent = { enable = true },
+
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					init_selection = "gnn",
+					node_incremental = "grn",
+					scope_incremental = "grc",
+					node_decremental = "grm",
+				},
+			},
+			-- Отключаем дублирующие функции LSP
+			textobjects = {
+				select = {
+					enable = false, -- Важно отключить, если используете LSP
+				},
+			},
+		})
+	end,
+}

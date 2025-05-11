@@ -48,11 +48,32 @@ return {
             on_attach = on_attach,
             settings = {
                 gopls = {
-                    analyses = { unusedparams = true },
+                    analyses = {
+                        unusedparams = true,
+                        shadow = true,  -- Обнаружение теневых переменных
+                        unusedwrite = true,
+                    },
                     staticcheck = true,
-                    -- Важно: отключаем дублирующие проверки
-                    gofumpt = false,
+                    completeUnimported = true,
+                    hints = {
+                        assignVariableTypes = true,
+                        compositeLiteralFields = true,
+                        constantValues = true,
+                        functionTypeParameters = true,
+                        parameterNames = true,
+                        rangeVariableTypes = true,
+                    },
+                    -- Важно: отключаем дублирующую функциональность
+                    semanticTokens = false,
+                    codelenses = {
+                        generate = false,  -- Отключаем генерацию кода
+                        gc_details = false,
+                        test = true,
+                    },
                 }
+            },
+            flags = {
+                debounce_text_changes = 200,  -- Задержка для обновлений
             }
         })
 
