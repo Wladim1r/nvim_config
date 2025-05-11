@@ -21,5 +21,6 @@ vim.keymap.set('i', 'jj', '<Esc>', { noremap = true, silent = true })
 vim.keymap.set("n", "<C-c>", "<cmd>Telescope close<CR>", { noremap = true })
 vim.keymap.set("n", "<leader>t", ":terminal<CR>i", { desc = "Open terminal and focus" })
 vim.api.nvim_set_keymap('t', 'jj', '<C-\\><C-n>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<Esc>', '<C-\\><C-n>', { noremap = true, silent = true })
 
 vim.opt.clipboard = 'unnamedplus'  -- Использовать системный буфер по умолчанию
