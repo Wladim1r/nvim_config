@@ -20,11 +20,8 @@ return {
             }
         })
         mason_lspconfig.setup({
-            ensure_installed = {
-                "gopls",    -- Go
-                "lua_ls",   -- Lua (если нужен)
-            },
-            automatic_installation = true,
+            ensure_installed = { "gopls", "lua_ls" },
+            automatic_installation = false, -- важно отключить!
         })
 
         mason_tool_installer.setup({
