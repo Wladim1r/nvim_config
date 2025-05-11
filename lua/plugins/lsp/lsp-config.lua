@@ -17,36 +17,36 @@ return {
         vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { underline = false })
         vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { underline = false })
 
-        vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "" })   -- Пусто (отключаем)
-        vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "" })    -- Пусто (отключаем)
-        vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "" })   -- Пусто (отключаем)
-
-        -- Настройка виртуального текста (отображается справа от строки)
+        -- Настройка значков диагностики (оставляем ТОЛЬКО для ошибок)
         vim.diagnostic.config({
+          signs = {
+            text = {
+              [vim.diagnostic.severity.WARN]  = "",   -- Пусто (отключаем предупреждения)
+              [vim.diagnostic.severity.INFO]  = "",   -- Пусто (отключаем инфо)
+              [vim.diagnostic.severity.HINT]  = "",   -- Пусто (отключаем подсказки)
+            },
+          },
+          -- Дополнительные настройки:
           virtual_text = {
-            severity = { min = vim.diagnostic.severity.ERROR },  -- Только ошибки
+            severity = { min = vim.diagnostic.severity.ERROR },  -- Вирт. текст только для ошибок
             format = function(diagnostic)
               return diagnostic.message
             end,
           },
-          signs = true,  -- Но значки будут скрыты для WARN/HINT/INFO из-за sign_define выше
-          underline = false,  -- Отключаем подчёркивание
-          update_in_insert = false,  -- Не обновлять в режиме вставки
+          underline = false,
+          update_in_insert = true,
         })
 
         -- Единые настройки диагностики
         vim.diagnostic.config({
             virtual_text = {
                 prefix = "◈",
-                spacing = 2,
+                spacing = 1,
                 format = function(diagnostic)
                     return diagnostic.message
                 end,
                 severity = { min = vim.diagnostic.severity.ERROR },
             },
-            underline = false,
-            update_in_insert = false, -- важно отключить!
-            severity_sort = true,
             float = { border = "rounded" },
         })
 
