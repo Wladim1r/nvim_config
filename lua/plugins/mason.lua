@@ -18,12 +18,5 @@ return {
 				},
 			},
 		})
-
-		--mason_tool_installer.setup({
-		--	ensure_installed = {
-		--		"golines", -- форматтер для Go
-		--		"stylua", -- форматтер для Lua (если нужен)
-		--	},
-		--})
 	end,
 }
