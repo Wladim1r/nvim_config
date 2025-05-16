@@ -26,7 +26,7 @@ local colors = {
 	builtinFunc = "#00dcff",
 	property = "#48cae4",
 	t = "#00dcff",
-	callFunc = "#758bfd",
+	callFunc = "#fdf0d5",
 }
 
 vim.api.nvim_set_hl(0, "@keyword.import.go", { fg = colors.import, italic = true, bold = true }) -- package, import
