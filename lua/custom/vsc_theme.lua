@@ -20,11 +20,11 @@ local colors = {
 	typeVarInStruct = "#8eecf5",
 	Namefunction = "#bdb2ff",
 	conditional = "#9bf6ff",
-	callFunction = "#4895ef",
+	callFunction = "#b2ff9e",
 	number = "#c4fff9",
 	character = "#ff99c8",
 	builtinFunc = "#00dcff",
-	property = "#b2ff9e",
+	property = "#48cae4",
 	t = "#00dcff",
 	callFunc = "#758bfd",
 }
