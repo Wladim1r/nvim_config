@@ -23,6 +23,7 @@ vim.keymap.set("n", "<leader>t", ":terminal<CR>i", { desc = "Open terminal and f
 vim.api.nvim_set_keymap("t", "jj", "<C-\\><C-n>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
 vim.keymap.set("n", "df", ":lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "fd", ":Telescope current_buffer_fuzzy_find<CR>", { noremap = true, silent = true })
 
 vim.opt.clipboard = "unnamedplus"
 
