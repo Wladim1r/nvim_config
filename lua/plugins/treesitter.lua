@@ -13,6 +13,7 @@ return {
 				"dockerfile",
 				"yaml",
 				"proto",
+				"cpp",
 			},
 			sync_install = false,
 			auto_isntall = true,

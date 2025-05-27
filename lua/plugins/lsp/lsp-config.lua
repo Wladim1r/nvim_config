@@ -117,5 +117,19 @@ return {
 				},
 			},
 		})
+
+		lspconfig.clangd.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			cmd = {
+				"clangd",
+				"--background-index",
+				"--clang-tidy",
+				"--header-insertion=never",
+				"--completion-style=detailed",
+				"--function-arg-placeholders",
+				"--fallback-style=llvm",
+			},
+		})
 	end,
 }

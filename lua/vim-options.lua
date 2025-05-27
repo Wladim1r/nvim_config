@@ -31,3 +31,38 @@ vim.opt.winblend = 10 -- Полупрозрачность
 vim.opt.pumblend = 10
 
 vim.g.border_chars = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "c", "cpp" },
+	callback = function()
+		-- Бинд на <leader>cp для "compile and play"
+		vim.keymap.set("n", "<leader>cp", function()
+			-- Получаем информацию о файле
+			local filename = vim.fn.expand("%:t") -- только имя файла
+			local filepath = vim.fn.expand("%:p") -- полный путь
+
+			-- Сохраняем файл
+			vim.cmd("w")
+
+			-- Определяем стандарт C++ автоматически
+			local cpp_std = "c++17"
+			local content = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false))
+			if content:match("std::format") or content:match("std::jthread") then
+				cpp_std = "c++20"
+			end
+
+			-- Формируем команду
+			local cmd = string.format(
+				'g++ -std=%s -Wall -Wextra -pedantic "%s" -o /tmp/%s.out && /tmp/%s.out && rm /tmp/%s.out',
+				cpp_std,
+				filepath,
+				filename,
+				filename,
+				filename
+			)
+
+			-- Выполняем в терминале
+			vim.cmd("split | terminal " .. cmd)
+		end, { buffer = true, desc = "Compile and run C++ file" })
+	end,
+})
