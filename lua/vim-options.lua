@@ -25,6 +25,12 @@ vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = 
 vim.keymap.set("n", "df", ":lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "fd", ":Telescope current_buffer_fuzzy_find<CR>", { noremap = true, silent = true })
 
+-- tabs
+vim.api.nvim_set_keymap("n", "<A-h>", ":tabprevious<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<A-l>", ":tabnext<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<A-c>", ":tabclose<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<A-o>", ":tabedit ", { noremap = true, silent = false })
+
 vim.opt.clipboard = "unnamedplus"
 
 vim.opt.winblend = 10 -- Полупрозрачность
