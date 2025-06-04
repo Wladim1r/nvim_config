@@ -1,3 +1,5 @@
+local keymap = vim.keymap.set
+
 vim.g.mapleader = " "
 
 vim.o.relativenumber = true
@@ -14,16 +16,16 @@ vim.api.nvim_set_hl(0, "LineNr", { fg = "#ffe5ec" })
 vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "#e7c6ff" })
 vim.opt.cursorline = true
 
-vim.keymap.set("n", "<leader>pp", ":!prettier -w %<CR><CR>")
-vim.keymap.set("n", "<leader>gr", ":!go run %<CR>", { desc = "Go Run current file" })
-vim.keymap.set("i", "<CapsLock>", "<Esc>", { noremap = true, silent = true })
-vim.keymap.set("i", "jj", "<Esc>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-c>", "<cmd>Telescope close<CR>", { noremap = true })
-vim.keymap.set("n", "<leader>t", ":terminal<CR>i", { desc = "Open terminal and focus" })
+keymap("n", "<leader>pp", ":!prettier -w %<CR><CR>")
+keymap("n", "<leader>gr", ":!go run %<CR>", { desc = "Go Run current file" })
+keymap("i", "<CapsLock>", "<Esc>", { noremap = true, silent = true })
+keymap("i", "jj", "<Esc>", { noremap = true, silent = true })
+keymap("n", "<C-c>", "<cmd>Telescope close<CR>", { noremap = true })
+keymap("n", "<leader>t", ":terminal<CR>i", { desc = "Open terminal and focus" })
 vim.api.nvim_set_keymap("t", "jj", "<C-\\><C-n>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
-vim.keymap.set("n", "df", ":lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "fd", ":Telescope current_buffer_fuzzy_find<CR>", { noremap = true, silent = true })
+keymap("n", "df", ":lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
+keymap("n", "fd", ":Telescope current_buffer_fuzzy_find<CR>", { noremap = true, silent = true })
 
 -- tabs
 vim.api.nvim_set_keymap("n", "<A-h>", ":tabprevious<CR>", { noremap = true, silent = true })
@@ -42,7 +44,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "c", "cpp" },
 	callback = function()
 		-- Бинд на <leader>cp для "compile and play"
-		vim.keymap.set("n", "<leader>cp", function()
+		keymap("n", "<leader>cp", function()
 			-- Получаем информацию о файле
 			local filename = vim.fn.expand("%:t") -- только имя файла
 			local filepath = vim.fn.expand("%:p") -- полный путь
@@ -72,3 +74,11 @@ vim.api.nvim_create_autocmd("FileType", {
 		end, { buffer = true, desc = "Compile and run C++ file" })
 	end,
 })
+
+-- shortcuts for debug
+keymap("n", "<leader>db", "<cmd>DapToggleBreakpoint<CR>", { desc = "Toggle breakpoint" })
+keymap("n", "<F5>", "<cmd>DapContinue<CR>", { desc = "Start/continue debugger" })
+keymap("n", "<F10>", "<cmd>DapStepOver<CR>", { desc = "Step over" })
+keymap("n", "<F11>", "<cmd>DapStepInto<CR>", { desc = "Step into" })
+keymap("n", "<F12>", "<cmd>DapStepOut<CR>", { desc = "Step out" })
+keymap("n", "<leader>dt", "<cmd>DapTerminate<CR>", { desc = "Terminate debugger" })
