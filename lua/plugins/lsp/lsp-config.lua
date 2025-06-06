@@ -73,6 +73,7 @@ return {
 		lspconfig.gopls.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
+			filetypes = { "go" },
 			settings = {
 				gopls = {
 					analyses = {
@@ -121,6 +122,7 @@ return {
 		lspconfig.clangd.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
+			filetypes = { "c", "cpp", "h", "hpp" },
 			cmd = {
 				"clangd",
 				"--background-index",
