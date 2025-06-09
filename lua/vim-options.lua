@@ -25,7 +25,7 @@ keymap("n", "<leader>t", ":terminal<CR>i", { desc = "Open terminal and focus" })
 vim.api.nvim_set_keymap("t", "jj", "<C-\\><C-n>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
 keymap("n", "df", ":lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
-keymap("n", "fd", ":Telescope current_buffer_fuzzy_find<CR>", { noremap = true, silent = true })
+keymap("n", "fw", ":Telescope current_buffer_fuzzy_find<CR>", { noremap = true, silent = true })
 
 -- tabs
 vim.api.nvim_set_keymap("n", "<A-h>", ":tabprevious<CR>", { noremap = true, silent = true })
