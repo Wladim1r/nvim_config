@@ -3,7 +3,6 @@ return {
 	build = ":TSUpdate",
 	config = function()
 		local configs = require("nvim-treesitter.configs")
-
 		configs.setup({
 			ensure_installed = {
 				"lua",
@@ -17,12 +16,20 @@ return {
 				"clangd",
 				"clang-format",
 				"codelldb",
+				"html",
+				"css",
+				"scss",
+				-- JavaScript/TypeScript
+				"javascript",
+				"typescript",
+				"tsx",
+				"json",
+				"jsonc",
 			},
 			sync_install = false,
 			auto_isntall = true,
 			highlight = { enable = true },
 			indent = { enable = true },
-
 			incremental_selection = {
 				enable = true,
 				keymaps = {

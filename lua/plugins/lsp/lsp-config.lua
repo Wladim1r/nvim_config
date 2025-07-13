@@ -10,13 +10,11 @@ return {
 	config = function()
 		local lspconfig = require("lspconfig")
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
 		-- Полностью отключаем подчеркивание
 		vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { underline = false })
 		vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { underline = false })
 		vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { underline = false })
 		vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { underline = false })
-
 		-- Настройка диагностики с приоритетом ошибок
 		vim.diagnostic.config({
 			signs = {
@@ -44,7 +42,6 @@ return {
 			update_in_insert = true,
 			severity_sort = true, -- Глобальная сортировка по важности
 		})
-
 		-- Единые настройки диагностики
 		vim.diagnostic.config({
 			virtual_text = {
@@ -62,14 +59,11 @@ return {
 			},
 			float = { border = "rounded" },
 		})
-
 		local capabilities = cmp_nvim_lsp.default_capabilities()
-
 		local on_attach = function(client, bufnr)
 			client.server_capabilities.documentFormattingProvider = false
 			client.server_capabilities.documentRangeFormattingProvider = false
 		end
-
 		lspconfig.gopls.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
@@ -103,7 +97,6 @@ return {
 				debounce_text_changes = 50,
 			},
 		})
-
 		lspconfig.lua_ls.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
@@ -118,7 +111,6 @@ return {
 				},
 			},
 		})
-
 		lspconfig.clangd.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
@@ -131,6 +123,72 @@ return {
 				"--completion-style=detailed",
 				"--function-arg-placeholders",
 				"--fallback-style=llvm",
+			},
+		})
+		lspconfig.html.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "html" },
+		})
+		lspconfig.cssls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "css", "scss", "less" },
+		})
+		-- JavaScript/TypeScript LSP
+		lspconfig.ts_ls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+			settings = {
+				typescript = {
+					inlayHints = {
+						includeInlayParameterNameHints = "all",
+						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+						includeInlayFunctionParameterTypeHints = true,
+						includeInlayVariableTypeHints = true,
+						includeInlayPropertyDeclarationTypeHints = true,
+						includeInlayFunctionLikeReturnTypeHints = true,
+						includeInlayEnumMemberValueHints = true,
+					},
+				},
+				javascript = {
+					inlayHints = {
+						includeInlayParameterNameHints = "all",
+						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+						includeInlayFunctionParameterTypeHints = true,
+						includeInlayVariableTypeHints = true,
+						includeInlayPropertyDeclarationTypeHints = true,
+						includeInlayFunctionLikeReturnTypeHints = true,
+						includeInlayEnumMemberValueHints = true,
+					},
+				},
+			},
+		})
+		-- ESLint LSP
+		lspconfig.eslint.setup({
+			capabilities = capabilities,
+			on_attach = function(client, bufnr)
+				client.server_capabilities.documentFormattingProvider = false
+				client.server_capabilities.documentRangeFormattingProvider = false
+				-- Автоматически запускать ESLint при сохранении
+				vim.api.nvim_create_autocmd("BufWritePre", {
+					buffer = bufnr,
+					command = "EslintFixAll",
+				})
+			end,
+			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+		})
+		-- JSON LSP
+		lspconfig.jsonls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "json", "jsonc" },
+			settings = {
+				json = {
+					schemas = require("schemastore").json.schemas(),
+					validate = { enable = true },
+				},
 			},
 		})
 	end,

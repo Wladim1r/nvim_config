@@ -4,7 +4,6 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		local conform = require("conform")
-
 		conform.setup({
 			formatters_by_ft = {
 				go = { "gofmt", "goimports", "golines" },
@@ -17,6 +16,18 @@ return {
 				yaml = { "prettier" },
 				markdown = { "prettier" },
 				lua = { "stylua" },
+				html = { "prettier" },
+				css = { "prettier" },
+				scss = { "prettier" },
+				less = { "prettier" },
+				-- JavaScript/TypeScript форматирование
+				javascript = { "prettier" },
+				javascriptreact = { "prettier" },
+				typescript = { "prettier" },
+				typescriptreact = { "prettier" },
+				-- Дополнительные форматы
+				vue = { "prettier" },
+				svelte = { "prettier" },
 			},
 			formatters = {
 				prettier = {
@@ -36,7 +47,6 @@ return {
 				lsp_fallback = true,
 			},
 		})
-
 		vim.keymap.set({ "n", "v" }, "<C-s>", "<cmd>w<cr>", { desc = "Save file" })
 	end,
 }
