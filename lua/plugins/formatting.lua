@@ -35,10 +35,9 @@ return {
 					require_cwd_config = true,
 				},
 				["clang-format"] = { -- Настройки для C/C++
-					prepend_args = {
-						"--style=file", -- Использует .clang-format из проекта
-						"--fallback-style=llvm", -- Стиль по умолчанию если нет конфига
-					},
+                    prepend_args = {
+                        "--style={BasedOnStyle: LLVM, UseTab: Never, IndentWidth: 4, TabWidth: 4, ColumnLimit: 0}",
+                    },
 				},
 			},
 			-- Форматировать при сохранении
