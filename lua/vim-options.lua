@@ -60,14 +60,14 @@ vim.api.nvim_create_autocmd("FileType", {
 			end
 
 			-- Формируем команду
-			local cmd = string.format(
-				'g++ -std=%s -Wall -Wextra -pedantic "%s" -o /tmp/%s.out && /tmp/%s.out && rm /tmp/%s.out',
-				cpp_std,
-				filepath,
-				filename,
-				filename,
-				filename
-			)
+            local cmd = string.format(
+                'g++ -std=%s -Wall -Wextra -pedantic "%s" -o /tmp/%s.out -lglut -lGLU -lGL -lm && /tmp/%s.out && rm /tmp/%s.out',
+                cpp_std,
+                filepath,
+                filename,
+                filename,
+                filename
+            )
 
 			-- Выполняем в терминале
 			vim.cmd("split | terminal " .. cmd)
