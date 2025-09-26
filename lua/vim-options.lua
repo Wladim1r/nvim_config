@@ -16,8 +16,8 @@ vim.api.nvim_set_hl(0, "LineNr", { fg = "#ffe5ec" })
 vim.api.nvim_set_hl(0, "CursorLineNr", { bg = "#e7c6ff" })
 vim.opt.cursorline = true
 
-keymap("n", "<leader>pp", ":!prettier -w %<CR><CR>")
 keymap("n", "<leader>gr", ":!go run %<CR>", { desc = "Go Run current file" })
+
 keymap("i", "<CapsLock>", "<Esc>", { noremap = true, silent = true })
 keymap("i", "jj", "<Esc>", { noremap = true, silent = true })
 keymap("n", "<C-c>", "<cmd>Telescope close<CR>", { noremap = true })
@@ -26,6 +26,14 @@ vim.api.nvim_set_keymap("t", "jj", "<C-\\><C-n>", { noremap = true, silent = tru
 vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
 keymap("n", "df", ":lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
 keymap("n", "fw", ":Telescope current_buffer_fuzzy_find<CR>", { noremap = true, silent = true })
+
+-- don't copy when deleting
+keymap("n", "x", '"_x')
+keymap("n", "d", '"_d')
+keymap("n", "D", '"_D')
+keymap("v", "x", '"_x')
+keymap("v", "d", '"_d')
+keymap("v", "D", '"_D')
 
 -- tabs
 vim.api.nvim_set_keymap("n", "<A-h>", ":tabprevious<CR>", { noremap = true, silent = true })

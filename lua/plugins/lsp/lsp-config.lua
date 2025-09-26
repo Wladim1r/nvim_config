@@ -10,55 +10,34 @@ return {
 	config = function()
 		local lspconfig = require("lspconfig")
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
-		-- Полностью отключаем подчеркивание
-		vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { underline = false })
-		vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { underline = false })
-		vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { underline = false })
-		vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { underline = false })
-		-- Настройка диагностики с приоритетом ошибок
+		-- diagnostic settings
 		vim.diagnostic.config({
+			underline = true,
+			update_in_insert = true,
+			virtual_text = {
+				spacing = 4,
+				prefix = "◈",
+				source = "if_many",
+				severity = { min = vim.diagnostic.severity.HINT },
+			},
+			severity_sort = true,
+			float = {
+				source = "if_many",
+				border = "rounded",
+			},
 			signs = {
 				text = {
-					[vim.diagnostic.severity.ERROR] = "E",
-					[vim.diagnostic.severity.WARN] = "W",
-					[vim.diagnostic.severity.INFO] = "",
-					[vim.diagnostic.severity.HINT] = "",
+					[vim.diagnostic.severity.ERROR] = "",
+					[vim.diagnostic.severity.WARN] = "",
+					[vim.diagnostic.severity.INFO] = "",
+					[vim.diagnostic.severity.HINT] = "",
 				},
 			},
-			virtual_text = {
-				severity = {
-					min = vim.diagnostic.severity.WARN,
-					severity_sort = true, -- Ошибки выше предупреждений
-				},
-				format = function(diagnostic)
-					local prefixes = {
-						[vim.diagnostic.severity.ERROR] = "",
-						[vim.diagnostic.severity.WARN] = "",
-					}
-					return (prefixes[diagnostic.severity] or "") .. diagnostic.message
-				end,
-			},
-			underline = false,
-			update_in_insert = true,
-			severity_sort = true, -- Глобальная сортировка по важности
 		})
-		-- Единые настройки диагностики
-		vim.diagnostic.config({
-			virtual_text = {
-				prefix = "◈",
-				spacing = 1,
-				severity_sort = true,
-				format = function(diagnostic)
-					local prefixes = {
-						[vim.diagnostic.severity.ERROR] = "",
-						[vim.diagnostic.severity.WARN] = "",
-					}
-					return (prefixes[diagnostic.severity] or "") .. diagnostic.message
-				end,
-				severity = { min = vim.diagnostic.severity.WARN },
-			},
-			float = { border = "rounded" },
-		})
+
+		vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = "#00ff00" })
+		vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#00ff00" })
+
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 		local on_attach = function(client, bufnr)
 			client.server_capabilities.documentFormattingProvider = false
@@ -134,50 +113,6 @@ return {
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "css", "scss", "less" },
-		})
-		-- JavaScript/TypeScript LSP
-		lspconfig.ts_ls.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-			settings = {
-				typescript = {
-					inlayHints = {
-						includeInlayParameterNameHints = "all",
-						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayVariableTypeHints = true,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayEnumMemberValueHints = true,
-					},
-				},
-				javascript = {
-					inlayHints = {
-						includeInlayParameterNameHints = "all",
-						includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-						includeInlayFunctionParameterTypeHints = true,
-						includeInlayVariableTypeHints = true,
-						includeInlayPropertyDeclarationTypeHints = true,
-						includeInlayFunctionLikeReturnTypeHints = true,
-						includeInlayEnumMemberValueHints = true,
-					},
-				},
-			},
-		})
-		-- ESLint LSP
-		lspconfig.eslint.setup({
-			capabilities = capabilities,
-			on_attach = function(client, bufnr)
-				client.server_capabilities.documentFormattingProvider = false
-				client.server_capabilities.documentRangeFormattingProvider = false
-				-- Автоматически запускать ESLint при сохранении
-				vim.api.nvim_create_autocmd("BufWritePre", {
-					buffer = bufnr,
-					command = "EslintFixAll",
-				})
-			end,
-			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 		})
 		-- JSON LSP
 		lspconfig.jsonls.setup({
