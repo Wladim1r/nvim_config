@@ -1,7 +1,7 @@
 local colors = {
 	keyword = "#cc91f0",
 	control = "#d5f5f8",
-	string = "#1dd3b0",
+	string = "#A8E4A0",
 	function_name = "#48bfe3",
 	func = "#ff99ff",
 	type = "#ff99ff",
@@ -9,7 +9,7 @@ local colors = {
 	import = "#ff70a6",
 	punctuation = "#d2fbff",
 	escape = "#f9c74f",
-	placeholder = "#fc7bdc",
+	placeholder = "#ff99c8",
 	comment = "#b8f2e6",
 	storage = "#9cf4fe",
 	module = "#8eecf5",
