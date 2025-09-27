@@ -21,9 +21,8 @@ keymap("n", "<leader>gr", ":!go run %<CR>", { desc = "Go Run current file" })
 keymap("i", "<CapsLock>", "<Esc>", { noremap = true, silent = true })
 keymap("i", "jj", "<Esc>", { noremap = true, silent = true })
 keymap("n", "<C-c>", "<cmd>Telescope close<CR>", { noremap = true })
-keymap("n", "<leader>t", ":terminal<CR>i", { desc = "Open terminal and focus" })
-vim.api.nvim_set_keymap("t", "jj", "<C-\\><C-n>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "jj", [[<C-\><C-n>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
 keymap("n", "df", ":lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
 keymap("n", "fw", ":Telescope current_buffer_fuzzy_find<CR>", { noremap = true, silent = true })
 
@@ -35,11 +34,7 @@ keymap("v", "x", '"_x')
 keymap("v", "d", '"_d')
 keymap("v", "D", '"_D')
 
--- tabs
-vim.api.nvim_set_keymap("n", "<A-h>", ":tabprevious<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<A-l>", ":tabnext<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<A-c>", ":tabclose<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<A-o>", ":tabedit ", { noremap = true, silent = false })
+
 
 vim.opt.clipboard = "unnamedplus"
 
@@ -90,3 +85,8 @@ keymap("n", "<F10>", "<cmd>DapStepOver<CR>", { desc = "Step over" })
 keymap("n", "<F11>", "<cmd>DapStepInto<CR>", { desc = "Step into" })
 keymap("n", "<F12>", "<cmd>DapStepOut<CR>", { desc = "Step out" })
 keymap("n", "<leader>dt", "<cmd>DapTerminate<CR>", { desc = "Terminate debugger" })
+
+-- Bufferline navigation
+vim.api.nvim_set_keymap("n", "<A-p>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<A-n>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<A-d>", ":bdelete<CR>", { noremap = true, silent = true })
