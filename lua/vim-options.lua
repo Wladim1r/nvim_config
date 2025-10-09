@@ -30,7 +30,6 @@ keymap("n", "fw", ":Telescope current_buffer_fuzzy_find<CR>", { noremap = true, 
 keymap("n", "x", '"_x')
 keymap("n", "d", '"_d')
 keymap("n", "D", '"_D')
-keymap("v", "x", '"_x')
 keymap("v", "d", '"_d')
 keymap("v", "D", '"_D')
 
@@ -89,4 +88,4 @@ keymap("n", "<leader>dt", "<cmd>DapTerminate<CR>", { desc = "Terminate debugger"
 -- Bufferline navigation
 vim.api.nvim_set_keymap("n", "<A-p>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<A-n>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<A-d>", ":bdelete<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<A-d>", ":bdelete | :bprevious<CR>", { noremap = true, silent = true })
