@@ -86,6 +86,6 @@ keymap("n", "<F12>", "<cmd>DapStepOut<CR>", { desc = "Step out" })
 keymap("n", "<leader>dt", "<cmd>DapTerminate<CR>", { desc = "Terminate debugger" })
 
 -- Bufferline navigation
-vim.api.nvim_set_keymap("n", "<A-p>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<A-n>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<A-d>", ":bdelete | :bprevious<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-A-p>", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-A-n>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-A-d>", ":bdelete | :bprevious<CR>", { noremap = true, silent = true })
