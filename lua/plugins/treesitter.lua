@@ -19,10 +19,6 @@ return {
 				"html",
 				"css",
 				"scss",
-				-- JavaScript/TypeScript
-				"javascript",
-				"typescript",
-				"tsx",
 				"json",
 				"jsonc",
 			},

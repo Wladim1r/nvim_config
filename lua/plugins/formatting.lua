@@ -20,14 +20,7 @@ return {
 				css = { "prettier" },
 				scss = { "prettier" },
 				less = { "prettier" },
-				-- JavaScript/TypeScript форматирование
-				javascript = { "prettier" },
-				javascriptreact = { "prettier" },
-				typescript = { "prettier" },
-				typescriptreact = { "prettier" },
-				-- Дополнительные форматы
-				vue = { "prettier" },
-				svelte = { "prettier" },
+				python = { "black" },
 			},
 			formatters = {
 				prettier = {
