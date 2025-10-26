@@ -47,39 +47,8 @@ return {
 			client.server_capabilities.documentFormattingProvider = false
 			client.server_capabilities.documentRangeFormattingProvider = false
 		end
-		lspconfig.gopls.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "go" },
-			settings = {
-				gopls = {
-					analyses = {
-						unusedparams = true,
-						shadow = true,
-						unusedwrite = true,
-					},
-					staticcheck = true,
-					completeUnimported = true,
-					hints = {
-						assignVariableTypes = true,
-						compositeLiteralFields = true,
-						constantValues = true,
-						functionTypeParameters = true,
-						parameterNames = true,
-						rangeVariableTypes = true,
-					},
-					semanticTokens = false,
-					codelenses = {
-						generate = false,
-						gc_details = false,
-						test = true,
-					},
-				},
-			},
-			flags = {
-				debounce_text_changes = 50,
-			},
-		})
+		
+		
 		lspconfig.lua_ls.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
@@ -129,6 +98,11 @@ return {
 					validate = { enable = true },
 				},
 			},
+		})
+		lspconfig.pyright.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "python" },
 		})
 	end,
 }
