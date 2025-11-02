@@ -28,14 +28,14 @@ return {
 					require_cwd_config = true,
 				},
 				["clang-format"] = { -- Настройки для C/C++
-                    prepend_args = {
-                        "--style={BasedOnStyle: LLVM, UseTab: Never, IndentWidth: 4, TabWidth: 4, ColumnLimit: 0}",
-                    },
+					prepend_args = {
+						"--style={BasedOnStyle: LLVM, UseTab: Never, IndentWidth: 4, TabWidth: 4, ColumnLimit: 0}",
+					},
 				},
 			},
 			-- Форматировать при сохранении
 			format_on_save = {
-				timeout_ms = 100,
+				timeout_ms = 500,
 				lsp_fallback = true,
 			},
 		})

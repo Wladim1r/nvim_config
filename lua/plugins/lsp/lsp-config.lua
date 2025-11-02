@@ -36,15 +36,6 @@ return {
 			},
 		})
 
-		vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#FC1C1C", bold = true, italic = true })
-		vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#FC1C1C", bold = true, italic = true })
-		vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#FFCC66" })
-		vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = "#FFCC66" })
-		vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = "#00BFFF" })
-		vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { fg = "#00BFFF" })
-		vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#98FB98" })
-		vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { fg = "#98FB98" })
-
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 		local on_attach = function(client, bufnr)
 			if client.server_capabilities.documentSymbolProvider then
@@ -108,6 +99,13 @@ return {
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "python" },
+			settings = {
+				python = {
+					analysis = {
+						useLibraryCodeForTypes = false,
+					},
+				},
+			},
 		})
 	end,
 }
