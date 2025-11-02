@@ -36,8 +36,14 @@ return {
 			},
 		})
 
-		vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = "#00ff00" })
-		vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#00ff00" })
+		vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#FC1C1C", bold = true, italic = true })
+		vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#FC1C1C", bold = true, italic = true })
+		vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#FFCC66" })
+		vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = "#FFCC66" })
+		vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = "#00BFFF" })
+		vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { fg = "#00BFFF" })
+		vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "#98FB98" })
+		vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { fg = "#98FB98" })
 
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 		local on_attach = function(client, bufnr)
@@ -47,8 +53,7 @@ return {
 			client.server_capabilities.documentFormattingProvider = false
 			client.server_capabilities.documentRangeFormattingProvider = false
 		end
-		
-		
+
 		lspconfig.lua_ls.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
