@@ -31,4 +31,5 @@ require("lazy").setup({
 	checker = { enabled = true },
 })
 
-require("custom.vsc_theme")
+require("custom.go_theme")
+require("custom.python_theme")
