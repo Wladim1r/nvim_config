@@ -18,7 +18,7 @@ local colors = {
 	typeName = "#00dcff",
 	varInStruct = "#70d6ff",
 	typeVarInStruct = "#8eecf5",
-	Namefunction = "#bdb2ff",
+	Namefunction = "#C42EFF",
 	conditional = "#9bf6ff",
 	callFunction = "#70DEFF",
 	number = "#c4fff9",
@@ -27,6 +27,7 @@ local colors = {
 	property = "#48cae4",
 	t = "#00dcff",
 	callFunc = "#fdf0d5",
+	fu = "#E00000",
 }
 
 vim.api.nvim_set_hl(0, "@keyword.import.go", { fg = colors.import, italic = true, bold = true }) -- package, import
@@ -37,7 +38,7 @@ vim.api.nvim_set_hl(0, "@variable.member.go", { fg = colors.varInStruct }) -- na
 vim.api.nvim_set_hl(0, "@type.builtin.go", { fg = colors.typeVarInStruct, italic = true }) -- type of name in Struct
 vim.api.nvim_set_hl(0, "@function.builtin", { fg = colors.builtinFunc, italic = true })
 vim.api.nvim_set_hl(0, "@function.method.go", { fg = colors.Namefunction, italic = true }) -- function name
-vim.api.nvim_set_hl(0, "@function.go", { fg = colors.callFunc })
+vim.api.nvim_set_hl(0, "@function.go", { fg = colors.fu })
 vim.api.nvim_set_hl(0, "@punctuation.delimiter", { fg = colors.punctuation })
 vim.api.nvim_set_hl(0, "@punctuation.bracket", { fg = colors.punctuation })
 vim.api.nvim_set_hl(0, "@keyword.function.go", { fg = colors.func, italic = true, bold = true }) -- func

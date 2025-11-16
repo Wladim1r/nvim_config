@@ -12,10 +12,10 @@ return {
 		vim.g.loaded_netrwPlugin = 1
 
 		require("nvim-tree").setup({
-  filters = {
-    git_ignored = false,
-  },
-})
+			filters = {
+				git_ignored = false,
+			},
+		})
 
 		vim.keymap.set("n", "<c-n>", ":NvimTreeFindFileToggle<CR>")
 	end,

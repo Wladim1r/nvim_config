@@ -32,4 +32,4 @@ require("lazy").setup({
 })
 
 require("custom.go_theme")
-require("custom.python_theme")
+-- require("custom.python_theme")

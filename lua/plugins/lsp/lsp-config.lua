@@ -90,7 +90,7 @@ return {
 			filetypes = { "json", "jsonc" },
 			settings = {
 				json = {
-					schemas = require("schemastore").json.schemas(),
+					-- schemas = require("schemastore").json.schemas(),
 					validate = { enable = true },
 				},
 			},
@@ -104,6 +104,19 @@ return {
 					analysis = {
 						useLibraryCodeForTypes = false,
 					},
+				},
+			},
+		})
+		lspconfig.gopls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "go", "gomod", "gowork", "gotmpl" },
+			settings = {
+				gopls = {
+					analyses = {
+						unusedparams = true,
+					},
+					staticcheck = true,
 				},
 			},
 		})
