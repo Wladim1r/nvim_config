@@ -13,6 +13,31 @@ return {
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 
+		local kind_icons = {
+			Text = "",
+			Method = "",
+			Function = "󰊕",
+			Constructor = "",
+			Field = "",
+			Variable = "󱀍",
+			Class = "",
+			Interface = "",
+			Module = "",
+			Property = "",
+			Unit = "",
+			Value = "",
+			Enum = "",
+			Keyword = "",
+			Snippet = "",
+			Reference = "",
+			EnumMember = "",
+			Constant = "󰐀",
+			Struct = "",
+			Event = "",
+			Operator = "",
+			TypeParameter = "",
+		}
+
 		-- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
 		require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -28,6 +53,15 @@ return {
 			window = {
 				completion = cmp.config.window.bordered(),
 				documentation = cmp.config.window.bordered(),
+			},
+			formatting = {
+				format = function(entry, vim_item)
+					-- Kind Icon
+					vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind] or "?", vim_item.kind)
+					-- Source Menu
+					vim_item.menu = nil
+					return vim_item
+				end,
 			},
 			mapping = cmp.mapping.preset.insert({
 				["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
