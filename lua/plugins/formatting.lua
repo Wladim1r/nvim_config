@@ -6,7 +6,7 @@ return {
 		local conform = require("conform")
 		conform.setup({
 			formatters_by_ft = {
-				go = { "gofmt", "goimports", "golines" },
+				go = { "goimports", "golines" },
 				cpp = { "clang-format" }, -- Добавлено для C++
 				c = { "clang-format" }, -- Добавлено для C
 				h = { "clang-format" }, -- Добавлено для C/C++ заголовков

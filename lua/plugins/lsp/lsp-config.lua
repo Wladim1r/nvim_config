@@ -41,8 +41,22 @@ return {
 			if client.server_capabilities.documentSymbolProvider then
 				navic.attach(client, bufnr)
 			end
-			client.server_capabilities.documentFormattingProvider = false
-			client.server_capabilities.documentRangeFormattingProvider = false
+			if client.name ~= "gopls" then
+				client.server_capabilities.documentFormattingProvider = false
+				client.server_capabilities.documentRangeFormattingProvider = false
+			else
+				vim.api.nvim_create_autocmd("BufWritePre", {
+					buffer = bufnr,
+					callback = function()
+						vim.lsp.buf.format({
+							filter = function(c)
+								return c.name == "gopls"
+							end,
+							async = false,
+						})
+					end,
+				})
+			end
 		end
 
 		lspconfig.lua_ls.setup({

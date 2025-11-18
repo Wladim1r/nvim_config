@@ -88,6 +88,8 @@ return {
 				"sql-formatter",
 				"stylua",
 				"black",
+				"goimports",
+				"golines",
 			},
 		})
 	end,
