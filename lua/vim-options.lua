@@ -61,7 +61,8 @@ vim.api.nvim_create_autocmd("FileType", {
 
 			-- Формируем команду
 			local cmd = string.format(
-				'g++ -std=%s -Wall -Wextra -pedantic "%s" -o /tmp/%s.out -lGL -lGLEW -lglut -lGLU -lm && /tmp/%s.out && rm /tmp/%s.out',
+				-- ЕСЛИ НУЖНО РИСОВАТЬ С ПОМОЩЬЮ FREEGLUT 'g++ -std=%s -Wall -Wextra -pedantic "%s" -o /tmp/%s.out -lGL -lGLEW -lglut -lGLU -lm && /tmp/%s.out && rm /tmp/%s.out',
+				'g++ -std=%s -Wall -Wextra -pedantic "%s" -o /tmp/%s.out -lm && /tmp/%s.out && rm /tmp/%s.out',
 				cpp_std,
 				filepath,
 				filename,
