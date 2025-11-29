@@ -6,7 +6,8 @@ return {
 		require("bufferline").setup({
 			options = {
 				mode = "buffers",
-				separator_style = "slant",
+				separator_style = "thin",
+				indicator = { icon = "▎" },
 				show_buffer_close_icons = true,
 				show_close_icon = "always",
 				diagnostics = "nvim_lsp",
