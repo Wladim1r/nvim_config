@@ -25,7 +25,18 @@ return {
 						path = 1, -- relative path
 					},
 				},
-				lualine_x = { "diagnostics", "filetype", get_os_icon },
+				lualine_x = {
+					"diagnostics",
+					"filetype",
+					{
+						function()
+							return " " .. os.date("%H:%M")
+						end,
+						cond = function()
+							return vim.o.columns > 100
+						end,
+					},
+				},
 				lualine_y = { "progress" },
 				lualine_z = { "location" },
 			},
