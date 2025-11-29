@@ -3,10 +3,10 @@ local colors = {
 	control = "#d5f5f8",
 	string = "#A8E4A0",
 	function_name = "#48bfe3",
-	func = "#ff99ff",
+	func = "#B6B3FF",
 	type = "#ff99ff",
 	null_bool = "#d00000",
-	import = "#ff70a6",
+	import = "#6BA0EF",
 	punctuation = "#d2fbff",
 	escape = "#f9c74f",
 	placeholder = "#ff99c8",
@@ -30,7 +30,7 @@ local colors = {
 	fu = "#E00000",
 }
 
-vim.api.nvim_set_hl(0, "@keyword.import.go", { fg = colors.import, italic = true, bold = true }) -- package, import
+vim.api.nvim_set_hl(0, "@keyword.import", { fg = colors.import, italic = true, bold = true }) -- package, import
 vim.api.nvim_set_hl(0, "@constant.go", { fg = colors.constVar, italic = true }) -- const
 vim.api.nvim_set_hl(0, "@keyword.type.go", { fg = colors.type, italic = true, bold = true }) -- type
 vim.api.nvim_set_hl(0, "@type.definition.go", { fg = colors.typeName, italic = true, bold = true }) -- type`s name
