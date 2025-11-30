@@ -121,18 +121,5 @@ return {
 				},
 			},
 		})
-		lspconfig.gopls.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "go", "gomod", "gowork", "gotmpl" },
-			settings = {
-				gopls = {
-					analyses = {
-						unusedparams = true,
-					},
-					staticcheck = true,
-				},
-			},
-		})
 	end,
 }
