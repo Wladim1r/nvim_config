@@ -3,10 +3,10 @@ local colors = {
 	control = "#d5f5f8",
 	string = "#A8E4A0",
 	function_name = "#48bfe3",
-	func = "#B6B3FF",
+	func = "#CCADFF",
 	type = "#ff99ff",
 	null_bool = "#d00000",
-	import = "#6BA0EF",
+	import = "#8eecf5",
 	punctuation = "#d2fbff",
 	escape = "#f9c74f",
 	placeholder = "#ff99c8",
@@ -27,7 +27,7 @@ local colors = {
 	property = "#48cae4",
 	t = "#00dcff",
 	callFunc = "#fdf0d5",
-	fu = "#E00000",
+	fu = "#6497F7",
 }
 
 vim.api.nvim_set_hl(0, "@keyword.import", { fg = colors.import, italic = true, bold = true }) -- package, import
