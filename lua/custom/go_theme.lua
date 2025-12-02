@@ -12,30 +12,30 @@ local colors = {
 	placeholder = "#ff99c8",
 	comment = "#878EC0",
 	storage = "#9cf4fe",
-	module = "#8eecf5",
+	module = "#A8D7FF",
 	variable = "#cae9ff",
 	constVar = "#ffe5ec",
 	typeName = "#00dcff",
-	varInStruct = "#70d6ff",
+	varInStruct = "#92D2F7",
 	typeVarInStruct = "#8eecf5",
-	Namefunction = "#B975FF",
+	Namefunction = "#BD7AFF",
 	conditional = "#9bf6ff",
-	callFunction = "#70DEFF",
+	callFunction = "#00dcff",
 	number = "#c4fff9",
 	character = "#ff99c8",
 	builtinFunc = "#00dcff",
-	property = "#48cae4",
-	t = "#00dcff",
+	property = "#7AD4FF",
+	t = "#97BDFC",
 	callFunc = "#fdf0d5",
 	fu = "#6497F7",
 }
 
-vim.api.nvim_set_hl(0, "@keyword.import", { fg = colors.import, italic = true, bold = true }) -- package, import
+vim.api.nvim_set_hl(0, "@keyword.import", { fg = colors.import, italic = true, bold = true })
 vim.api.nvim_set_hl(0, "@constant.go", { fg = colors.constVar, italic = true }) -- const
 vim.api.nvim_set_hl(0, "@keyword.type.go", { fg = colors.type, italic = true, bold = true }) -- type
-vim.api.nvim_set_hl(0, "@type.definition.go", { fg = colors.typeName, italic = true, bold = true }) -- type`s name
-vim.api.nvim_set_hl(0, "@variable.member.go", { fg = colors.varInStruct }) -- name var in Struct
-vim.api.nvim_set_hl(0, "@type.builtin.go", { fg = colors.typeVarInStruct, italic = true }) -- type of name in Struct
+vim.api.nvim_set_hl(0, "@type.definition.go", { fg = colors.typeName, italic = true, bold = true })
+vim.api.nvim_set_hl(0, "@variable.member.go", { fg = colors.varInStruct })
+vim.api.nvim_set_hl(0, "@type.builtin.go", { fg = colors.typeVarInStruct, italic = true })
 vim.api.nvim_set_hl(0, "@function.builtin", { fg = colors.builtinFunc, italic = true })
 vim.api.nvim_set_hl(0, "@function.method.go", { fg = colors.Namefunction, italic = true }) -- function name
 vim.api.nvim_set_hl(0, "@function.go", { fg = colors.fu })
