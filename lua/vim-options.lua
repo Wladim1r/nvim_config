@@ -24,6 +24,7 @@ keymap("n", "<C-c>", "<cmd>Telescope close<CR>", { noremap = true })
 vim.api.nvim_set_keymap("t", "jj", [[<C-\><C-n>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
 keymap("n", "df", ":lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
+keymap("n", "<leader>i", vim.diagnostic.open_float, { desc = "Show diagnostic error messages" })
 keymap("n", "fw", ":Telescope current_buffer_fuzzy_find<CR>", { noremap = true, silent = true })
 
 -- don't copy when deleting

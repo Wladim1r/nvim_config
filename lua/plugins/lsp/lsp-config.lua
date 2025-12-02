@@ -15,16 +15,15 @@ return {
 		vim.diagnostic.config({
 			underline = true,
 			update_in_insert = true,
-			virtual_text = {
-				spacing = 4,
-				prefix = "◈",
-				source = "if_many",
-				severity = { min = vim.diagnostic.severity.HINT },
-			},
+			virtual_text = false,
 			severity_sort = true,
 			float = {
 				source = "if_many",
 				border = "rounded",
+				header = "",
+				format = function(d)
+					return d.message
+				end,
 			},
 			signs = {
 				text = {
