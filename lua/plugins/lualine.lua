@@ -30,7 +30,7 @@ return {
 					"filetype",
 					{
 						function()
-							return " " .. os.date("%d.%m.%Y") .. "  " .. os.date("%H:%M")
+							return " " .. os.date("%Y-%m-%d") .. "  " .. os.date("%H:%M")
 						end,
 						cond = function()
 							return vim.o.columns > 100
