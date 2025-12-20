@@ -1,82 +1,112 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
+		lazy = true,
+		dependencies = {
+			"rcarriga/nvim-dap-ui",
+			"jay-babu/mason-nvim-dap.nvim",
+		},
+		keys = {
+			{ "<leader>db", "<cmd>DapToggleBreakpoint<cr>", desc = "Toggle Breakpoint" },
+			{ "<leader>dc", "<cmd>DapContinue<cr>", desc = "Continue" },
+			{ "<leader>di", "<cmd>DapStepInto<cr>", desc = "Step Into" },
+			{ "<leader>do", "<cmd>DapStepOver<cr>", desc = "Step Over" },
+			{ "<leader>dO", "<cmd>DapStepOut<cr>", desc = "Step Out" },
+			{ "<leader>dt", "<cmd>DapTerminate<cr>", desc = "Terminate" },
+		},
 		config = function()
 			local dap = require("dap")
-			-- Конфигурация для C++
-			dap.adapters.codelldb = {
+
+			-- Логирование
+			dap.set_log_level("TRACE")
+
+			-- Конфигурация адаптера для Go
+			dap.adapters.delve = {
 				type = "server",
-				host = "127.0.0.1",
 				port = "${port}",
 				executable = {
-					command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
-					args = { "--port", "${port}" },
+					command = "dlv", -- или полный путь: vim.fn.exepath("dlv")
+					args = { "dap", "-l", "127.0.0.1:${port}" },
 				},
 			}
-			dap.configurations.cpp = {
+
+			-- Конфигурации для Go
+			dap.configurations.go = {
 				{
-					name = "Launch C++ (codelldb)",
-					type = "codelldb",
+					type = "delve",
+					name = "Debug",
 					request = "launch",
-					program = function()
-						return vim.fn.input("Path to executable file: ", vim.fn.getcwd() .. "/", "file")
-					end,
-					cwd = "${workspaceFolder}",
-					stopOnEntry = false,
-					console = "integratedTerminal",
+					program = "${file}",
+				},
+				{
+					type = "delve",
+					name = "Debug Package",
+					request = "launch",
+					program = "${fileDirname}",
+				},
+				{
+					type = "delve",
+					name = "Debug test (go.mod)",
+					request = "launch",
+					mode = "test",
+					program = "./${relativeFileDirname}",
 				},
 			}
 		end,
 	},
+
 	{
 		"rcarriga/nvim-dap-ui",
-		dependencies = {
-			"mfussenegger/nvim-dap",
-			"nvim-lua/plenary.nvim",
-			"nvim-neotest/nvim-nio",
-		},
-		event = "VeryLazy",
+		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+		lazy = true,
 		config = function()
+			local dap = require("dap")
 			local dapui = require("dapui")
+
 			dapui.setup({
 				layouts = {
 					{
-						elements = { "repl" },
-						size = 0.1,
+						elements = {
+							{ id = "scopes", size = 0.25 },
+							{ id = "breakpoints", size = 0.25 },
+							{ id = "stacks", size = 0.25 },
+							{ id = "watches", size = 0.25 },
+						},
+						size = 40,
+						position = "left",
+					},
+					{
+						elements = {
+							{ id = "repl", size = 0.5 },
+							{ id = "console", size = 0.5 },
+						},
+						size = 10,
 						position = "bottom",
-					},
-					{
-						elements = { "breakpoints", "stacks", "watches" },
-						size = 0.1,
-						position = "left",
-					},
-					{
-						elements = { "scopes" },
-						size = 0.4, -- 40% от экрана
-						position = "left",
 					},
 				},
 			})
 
-			-- Подписка на события DAP
-			local dap = require("dap")
-			dap.listeners.after.event_initialized["dapui_config"] = dapui.open
-			dap.listeners.before.event_terminated["dapui_config"] = dapui.close
-			dap.listeners.before.event_exited["dapui_config"] = dapui.close
+			-- Автоматическое открытие/закрытие UI
+			dap.listeners.after.event_initialized["dapui_config"] = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_terminated["dapui_config"] = function()
+				dapui.close()
+			end
+			dap.listeners.before.event_exited["dapui_config"] = function()
+				dapui.close()
+			end
 		end,
 	},
+
 	{
 		"jay-babu/mason-nvim-dap.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"williamboman/mason.nvim",
-			"mfussenegger/nvim-dap",
+		dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+		cmd = { "DapInstall", "DapUninstall" },
+		opts = {
+			ensure_installed = { "delve" },
+			automatic_installation = true,
+			handlers = {},
 		},
-		config = function()
-			require("mason-nvim-dap").setup({
-				ensure_installed = { "codelldb" },
-				automatic_installation = true,
-			})
-		end,
 	},
 }
