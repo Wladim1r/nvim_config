@@ -1,15 +1,15 @@
 return {
-	"catppuccin/nvim",
-	name = "catppuccin",
+	"folke/tokyonight.nvim",
+	name = "tokyonight",
 	priority = 1000,
-
 	config = function()
-		require("catppuccin").setup({
+		require("tokyonight").setup({
+			style = "night",
 			integrations = {
-				cmp = true, -- Включаем интеграцию Catppuccin с nvim-cmp
+				cmp = true,
 			},
 		})
-		vim.cmd.colorscheme("catppuccin")
+		vim.cmd.colorscheme("tokyonight-night")
 		require("custom.colors").setup()
 	end,
 }
