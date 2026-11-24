@@ -58,44 +58,44 @@ return {
 			end
 		end
 
-		lspconfig.lua_ls.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			settings = {
-				Lua = {
-					diagnostics = {
-						globals = { "vim" },
-						disable = { "missing-parameters", "unused-local" },
-					},
-					workspace = { checkThirdParty = false },
-					completion = { callSnippet = "Replace" },
-				},
-			},
-		})
-		lspconfig.clangd.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "c", "cpp", "h", "hpp" },
-			cmd = {
-				"clangd",
-				"--background-index",
-				"--clang-tidy",
-				"--header-insertion=never",
-				"--completion-style=detailed",
-				"--function-arg-placeholders",
-				"--fallback-style=llvm",
-			},
-		})
-		lspconfig.html.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "html" },
-		})
-		lspconfig.cssls.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "css", "scss", "less" },
-		})
+		-- lspconfig.lua_ls.setup({
+			-- capabilities = capabilities,
+			-- on_attach = on_attach,
+			-- settings = {
+				-- Lua = {
+					-- diagnostics = {
+						-- globals = { "vim" },
+						-- disable = { "missing-parameters", "unused-local" },
+					-- },
+					-- workspace = { checkThirdParty = false },
+					-- completion = { callSnippet = "Replace" },
+				-- },
+			-- },
+		-- })
+		-- lspconfig.clangd.setup({
+			-- capabilities = capabilities,
+			-- on_attach = on_attach,
+			-- filetypes = { "c", "cpp", "h", "hpp" },
+			-- cmd = {
+				-- "clangd",
+				-- "--background-index",
+				-- "--clang-tidy",
+				-- "--header-insertion=never",
+				-- "--completion-style=detailed",
+				-- "--function-arg-placeholders",
+				-- "--fallback-style=llvm",
+			-- },
+		-- })
+		-- lspconfig.html.setup({
+			-- capabilities = capabilities,
+			-- on_attach = on_attach,
+			-- filetypes = { "html" },
+		-- })
+		-- lspconfig.cssls.setup({
+			-- capabilities = capabilities,
+			-- on_attach = on_attach,
+			-- filetypes = { "css", "scss", "less" },
+		-- })
 		-- JSON LSP
 		lspconfig.jsonls.setup({
 			capabilities = capabilities,
@@ -119,6 +119,47 @@ return {
 					},
 				},
 			},
+		})
+		-- DevOps: YAML, Dockerfile, docker compose, shell, Markdown
+		lspconfig.yamlls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			settings = {
+				-- не переставлять ключи при автодополнении
+				yaml = { keyOrdering = false },
+			},
+		})
+		lspconfig.dockerls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+		-- сервер docker compose подключается только к типу yaml.docker-compose,
+		-- а сам nvim даёт compose-файлам обычный тип yaml — учим его распознавать
+		vim.filetype.add({
+			filename = {
+				["docker-compose.yml"] = "yaml.docker-compose",
+				["docker-compose.yaml"] = "yaml.docker-compose",
+				["compose.yml"] = "yaml.docker-compose",
+				["compose.yaml"] = "yaml.docker-compose",
+			},
+			-- файлы переопределения: docker-compose.prod.yml, compose.local.yaml
+			-- (косой черты в шаблоне быть не должно: иначе nvim сверяет его с полным путём)
+			pattern = {
+				["docker%-compose%.[%w_.-]+%.ya?ml"] = "yaml.docker-compose",
+				["compose%.[%w_.-]+%.ya?ml"] = "yaml.docker-compose",
+			},
+		})
+		lspconfig.docker_compose_language_service.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+		lspconfig.bashls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+		lspconfig.marksman.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
 		})
 	end,
 }

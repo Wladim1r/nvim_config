@@ -12,7 +12,7 @@ return {
 				"dockerfile",
 				"markdown",
 				"markdown_inline",
-				"bush",
+				"bash",
 				"yaml",
 				"proto",
 				"cpp",

@@ -33,13 +33,20 @@ return {
 
 		mason_lspconfig.setup({
 			ensure_installed = {
-				"gopls",
-				"lua_ls",
-				"clangd",
-				"html",
-				"cssls",
+				-- выключено: gopls, lua_ls, clangd, html, cssls
+				-- "gopls",
+				-- "lua_ls",
+				-- "clangd",
+				-- "html",
+				-- "cssls",
 				"jsonls",
 				"pyright",
+				-- DevOps: YAML, Dockerfile, docker compose, shell, Markdown
+				"yamlls",
+				"dockerls",
+				"docker_compose_language_service",
+				"bashls",
+				"marksman",
 			},
 			automatic_installation = true,
 			handlers = {
@@ -83,13 +90,13 @@ return {
 
 		mason_tool_installer.setup({
 			ensure_installed = {
-				"clang-format",
+				-- "clang-format",
 				"prettier",
-				"sql-formatter",
-				"stylua",
+				-- "sql-formatter",
+				-- "stylua",
 				"black",
-				"goimports",
-				"golines",
+				-- "goimports",
+				-- "golines",
 			},
 		})
 	end,

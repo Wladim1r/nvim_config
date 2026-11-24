@@ -20,38 +20,38 @@ return {
 			-- Логирование
 			dap.set_log_level("TRACE")
 
-			-- Конфигурация адаптера для Go
-			dap.adapters.delve = {
-				type = "server",
-				port = "${port}",
-				executable = {
-					command = "dlv", -- или полный путь: vim.fn.exepath("dlv")
-					args = { "dap", "-l", "127.0.0.1:${port}" },
-				},
-			}
+			-- -- Конфигурация адаптера для Go
+			-- dap.adapters.delve = {
+				-- type = "server",
+				-- port = "${port}",
+				-- executable = {
+					-- command = "dlv", -- или полный путь: vim.fn.exepath("dlv")
+					-- args = { "dap", "-l", "127.0.0.1:${port}" },
+				-- },
+			-- }
 
-			-- Конфигурации для Go
-			dap.configurations.go = {
-				{
-					type = "delve",
-					name = "Debug",
-					request = "launch",
-					program = "${file}",
-				},
-				{
-					type = "delve",
-					name = "Debug Package",
-					request = "launch",
-					program = "${fileDirname}",
-				},
-				{
-					type = "delve",
-					name = "Debug test (go.mod)",
-					request = "launch",
-					mode = "test",
-					program = "./${relativeFileDirname}",
-				},
-			}
+			-- -- Конфигурации для Go
+			-- dap.configurations.go = {
+				-- {
+					-- type = "delve",
+					-- name = "Debug",
+					-- request = "launch",
+					-- program = "${file}",
+				-- },
+				-- {
+					-- type = "delve",
+					-- name = "Debug Package",
+					-- request = "launch",
+					-- program = "${fileDirname}",
+				-- },
+				-- {
+					-- type = "delve",
+					-- name = "Debug test (go.mod)",
+					-- request = "launch",
+					-- mode = "test",
+					-- program = "./${relativeFileDirname}",
+				-- },
+			-- }
 		end,
 	},
 
@@ -104,7 +104,8 @@ return {
 		dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
 		cmd = { "DapInstall", "DapUninstall" },
 		opts = {
-			ensure_installed = { "delve" },
+			-- ensure_installed = { "delve" }, -- отладчик Go выключен
+			ensure_installed = {},
 			automatic_installation = true,
 			handlers = {},
 		},
